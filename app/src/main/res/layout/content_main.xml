@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.troyphattrinh.fitness_app.MainActivity"
     tools:showIn="@layout/activity_main">
@@ -11,13 +12,14 @@
     <TextView
         android:id="@+id/Title"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="42dp"
         android:layout_marginBottom="470dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="WELCOME TO FITNESS APP"
+        android:text="@string/welcome_to_fitness_app"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
@@ -25,12 +27,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="174dp"
-        android:text="Username"
+        android:text="@string/username"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Title" />
@@ -43,23 +45,24 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="158dp"
+        android:width="240dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/usernameTextView"
         app:layout_constraintTop_toBottomOf="@+id/Title" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/passwordTextView"
         android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="33dp"
-        android:text="Password"
+        android:text="@string/password"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
 
     <EditText
         android:id="@+id/passwordText"
@@ -68,11 +71,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="19dp"
+        android:width="240dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/passwordTextView"
         app:layout_constraintTop_toBottomOf="@+id/usernameText" />
 
     <Button
@@ -84,7 +88,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="18dp"
         android:background="@android:drawable/checkbox_off_background"
-        android:text="Login"
+        android:text="@string/log_in"
         app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,10 +103,26 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="27dp"
-        android:text="Register a new account"
+        android:onClick="clickRegButton"
+        android:text="@string/register_a_new_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+    <ImageView
+        android:id="@+id/fitnessImage"
+        android:layout_width="152dp"
+        android:layout_height="128dp"
+        android:layout_marginBottom="320dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title"
+        app:layout_constraintVertical_bias="0.324"
+        app:srcCompat="@drawable/fitness_icon" />
 
 </android.support.constraint.ConstraintLayout>
