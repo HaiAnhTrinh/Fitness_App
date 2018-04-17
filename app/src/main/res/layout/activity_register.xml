@@ -95,7 +95,7 @@
         app:layout_constraintVertical_bias="0.668" />
 
     <EditText
-        android:id="@+id/dob_textField"
+        android:id="@+id/dob_textView"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -128,5 +128,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.874" />
+
+    <TextView
+        android:id="@+id/error_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="#FF0000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74" />
 
 </android.support.constraint.ConstraintLayout>

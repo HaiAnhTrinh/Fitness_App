@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public void clickLoginButton(View v){
         Intent intent = new Intent(this, MainMenuActivity.class);
 
-        //adding extra data to another intent
+        //adding extra data to mainMenu
         final EditText usernameText = findViewById(R.id.usernameText);
         String username = usernameText.getText().toString();
         intent.putExtra("username", username);

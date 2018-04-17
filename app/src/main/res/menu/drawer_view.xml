@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:checkable="true"
+            android:enabled="true"
+            android:title="Home"
+            android:visible="true" />
+        <item
+            android:id="@+id/nav_heart_rate"
+            android:checkable="true"
+            android:enabled="true"
+            android:title="Heart Rate"
+            android:visible="true" />
+        <item
+            android:id="@+id/nav_foot_step"
+            android:checkable="true"
+            android:enabled="true"
+            android:title="Foot step"
+            android:visible="true" />
+        <item
+            android:id="@+id/nav_cal_bmi"
+            android:checkable="true"
+            android:enabled="true"
+            android:title="Calculate BMI"
+            android:visible="true" />
+    </group>
+
+</menu>
