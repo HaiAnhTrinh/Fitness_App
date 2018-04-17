@@ -56,6 +56,9 @@ public class MainMenuActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.menu_icon);
 
         drawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
@@ -82,6 +85,8 @@ public class MainMenuActivity extends AppCompatActivity {
         );
     }
 
+
+    //handle clicked menu icon on the toolbar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
