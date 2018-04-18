@@ -1,17 +1,12 @@
 package com.example.troyphattrinh.fitness_app;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -20,41 +15,13 @@ public class RegisterActivity extends AppCompatActivity {
     private final EditText confirmPasswordText = findViewById(R.id.confirm_password_textField);
     private final EditText emailText = findViewById(R.id.email_textField);
     private final TextView dobText = findViewById(R.id.dob_textView);
-    private TextView errorText = findViewById(R.id.error_textView);
-    private DatePickerDialog.OnDateSetListener dobTextListener;
+    private final TextView errorText = findViewById(R.id.error_textView);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        dobText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(
-                        RegisterActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        dobTextListener,
-                        year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-
-        dobTextListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-
-                String date = month + "/" + day + "/" + year;
-                dobText.setText(date);
-            }
-        };
     }
 
     public void clickRegButton(View v){
@@ -66,14 +33,14 @@ public class RegisterActivity extends AppCompatActivity {
         String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
         String confirmPassword = confirmPasswordText.getText().toString();
-        //String dob = dobText.getText().toString();
+        String dob = dobText.getText().toString();
         String email = emailText.getText().toString();
 
         //TODO: have functions to check validity
         if(     username.length() != 0 &&
                 password.length() != 0 &&
                 confirmPassword.length() != 0 &&
-                //dob.length() != 0 &&
+                dob.length() != 0 &&
                 email.length() != 0 ) {
             startActivity(intent);
             errorText.setText("");
