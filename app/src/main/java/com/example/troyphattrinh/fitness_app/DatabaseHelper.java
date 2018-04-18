@@ -57,3 +57,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 }
+
+
+/*To do: Check validity of the USER when created and from that extend to checking for log in*/
