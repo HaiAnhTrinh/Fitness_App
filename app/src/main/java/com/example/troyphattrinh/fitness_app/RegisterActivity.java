@@ -10,12 +10,6 @@ import android.widget.TextView;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private final EditText usernameText = findViewById(R.id.username_textField);
-    private final EditText passwordText = findViewById(R.id.password_textField);
-    private final EditText confirmPasswordText = findViewById(R.id.confirm_password_textField);
-    private final EditText emailText = findViewById(R.id.email_textField);
-    private final TextView dobText = findViewById(R.id.dob_textView);
-    private final TextView errorText = findViewById(R.id.error_textView);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +18,16 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+
     public void clickRegButton(View v){
         Intent intent = new Intent(this, ConfirmRegisterActivity.class);
+
+        final EditText usernameText = findViewById(R.id.username_textField);
+        final EditText passwordText = findViewById(R.id.password_textField);
+        final EditText confirmPasswordText = findViewById(R.id.confirm_password_textField);
+        final EditText emailText = findViewById(R.id.email_textField);
+        final TextView dobText = findViewById(R.id.dob_textView);
+        final TextView errorText = findViewById(R.id.error_textView);
 
 
         //TODO: get user input and record them but dont put in the database yet
@@ -52,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     /*checks duplicate username in the database*
-    * return 1 if there is no duplicate, 0 otherwise*/
+     * return 1 if there is no duplicate, 0 otherwise*/
     boolean checkUsername(String username){
         return true;
     }
@@ -63,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /*compare password and confirmPassword*
-    * return 1 if they are identical, 0 otherwise*/
+     * return 1 if they are identical, 0 otherwise*/
     boolean checkConfirmPassword(String confirmPassword, String password){
         return true;
     }
@@ -77,5 +79,4 @@ public class RegisterActivity extends AppCompatActivity {
     boolean checkEmail(String email){
         return true;
     }
-
 }
