@@ -7,6 +7,7 @@
             android:id="@+id/nav_home"
             android:checkable="true"
             android:enabled="true"
+            android:icon="@drawable/home_icon"
             android:title="Home"
             android:visible="true" />
         <item
@@ -19,13 +20,15 @@
             android:id="@+id/nav_heart_rate"
             android:checkable="true"
             android:enabled="true"
+            android:icon="@drawable/heartrate_icon"
             android:title="Heart Rate"
             android:visible="true" />
         <item
             android:id="@+id/nav_foot_step"
             android:checkable="true"
             android:enabled="true"
-            android:title="Foot step"
+            android:icon="@drawable/footstep_icon"
+            android:title="Footstep counter"
             android:visible="true" />
     </group>
 

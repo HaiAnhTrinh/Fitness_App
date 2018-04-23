@@ -1,20 +1,27 @@
 package com.example.troyphattrinh.fitness_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.troyphattrinh.fitness_app.SQL.DatabaseHelper;
 
 
 public class RegisterActivity extends AppCompatActivity {
+
+    DatabaseHelper dbh;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
 
     }
 
@@ -31,19 +38,31 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //TODO: get user input and record them but dont put in the database yet
-
         String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
         String confirmPassword = confirmPasswordText.getText().toString();
         String dob = dobText.getText().toString();
         String email = emailText.getText().toString();
 
+
         //TODO: have functions to check validity
         if(     username.length() != 0 &&
                 password.length() != 0 &&
                 confirmPassword.length() != 0 &&
+                confirmPassword.equals(password) &&
                 dob.length() != 0 &&
                 email.length() != 0 ) {
+
+            dbh = new DatabaseHelper(this);
+            boolean success = dbh.addUser(username, password, dob, email);
+
+            if(success == true){
+                Toast.makeText(RegisterActivity.this, "Register successful!!!", Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(RegisterActivity.this, "OPPS", Toast.LENGTH_LONG).show();
+            }
+
             startActivity(intent);
             errorText.setText("");
         }
