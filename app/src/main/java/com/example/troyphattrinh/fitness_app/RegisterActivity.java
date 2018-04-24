@@ -2,14 +2,18 @@ package com.example.troyphattrinh.fitness_app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.troyphattrinh.fitness_app.SQL.DatabaseHelper;
+
+import java.util.Random;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -46,10 +50,9 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //TODO: have functions to check validity
-        if(     username.length() != 0 &&
-                password.length() != 0 &&
-                confirmPassword.length() != 0 &&
-                confirmPassword.equals(password) &&
+        if(     checkUsername(username) &&
+                checkPassword(password) &&
+                checkConfirmPassword(confirmPassword, password) &&
                 dob.length() != 0 &&
                 email.length() != 0 ) {
 
@@ -63,6 +66,15 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "OPPS", Toast.LENGTH_LONG).show();
             }
 
+            //generate a random 4 digit number
+            Random random = new Random();
+            String rand = String.format("%04d", random.nextInt(10000));
+
+
+            intent.putExtra("confirmCode", rand);
+
+            sendEmail(rand);
+
             startActivity(intent);
             errorText.setText("");
         }
@@ -72,21 +84,25 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    /*checks duplicate username in the database*
-     * return 1 if there is no duplicate, 0 otherwise*/
+    /* TODO: checks duplicate username in the database */
     boolean checkUsername(String username){
-        return true;
+        return username.length() >= 1;
     }
 
     /*checks correct requirement for password (minimum 8 characters)*/
     boolean checkPassword(String password){
-        return true;
+        return password.length() >= 8;
     }
 
-    /*compare password and confirmPassword*
-     * return 1 if they are identical, 0 otherwise*/
+    /*compare password and confirmPassword*/
     boolean checkConfirmPassword(String confirmPassword, String password){
-        return true;
+        boolean check = false;
+
+        if(confirmPassword.equals(password)){
+            check = true;
+        }
+
+        return check;
     }
 
     /*checks format*/
@@ -97,5 +113,23 @@ public class RegisterActivity extends AppCompatActivity {
 
     boolean checkEmail(String email){
         return true;
+    }
+
+    private void sendEmail(String confirmCode) {
+
+        final EditText emailText = findViewById(R.id.email_textField);
+        String TO = emailText.getText().toString();
+
+        //create an intent with ACTION_SEND action
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+
+        //putting contents to the email
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "FITNESS APP CONFIRMATION CODE");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Your confirmation code is: " + confirmCode);
+
     }
 }

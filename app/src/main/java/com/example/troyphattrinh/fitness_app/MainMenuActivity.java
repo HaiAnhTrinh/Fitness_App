@@ -24,10 +24,12 @@ public class MainMenuActivity extends AppCompatActivity {
 
         //enables the intent to get extra data from another activity
         Bundle mainMenuData = getIntent().getExtras();
+
         //if there is no extra data, don't do anything
         if(mainMenuData==null){
             return;
         }
+
         String username = mainMenuData.getString("username");
         final TextView usernameText = findViewById(R.id.username);
         //set welcome message
