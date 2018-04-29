@@ -1,4 +1,4 @@
-package com.example.troyphattrinh.fitness_app.SQL;
+package com.example.troyphattrinh.fitness_app;
 
 import android.content.ContentValues;
 import android.content.Context;

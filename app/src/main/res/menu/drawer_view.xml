@@ -30,6 +30,13 @@
             android:icon="@drawable/footstep_icon"
             android:title="Footstep counter"
             android:visible="true" />
+        <item
+            android:id="@+id/nav_logout"
+            android:checkable="true"
+            android:enabled="true"
+            android:icon="@drawable/ic_power_settings_new_black_24dp"
+            android:title="Logout"
+            android:visible="true" />
     </group>
 
 </menu>

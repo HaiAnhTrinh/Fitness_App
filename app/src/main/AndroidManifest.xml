@@ -23,17 +23,12 @@
 
         <activity
             android:name=".RegisterActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"/>
 
-        </activity>
-
-        <activity
-            android:name=".ConfirmRegisterActivity"
-            android:parentActivityName=".RegisterActivity">
-
-        </activity>
-
-        <activity android:name=".MainMenuActivity"></activity>
+        <activity android:name=".MainMenuActivity" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
 </manifest>

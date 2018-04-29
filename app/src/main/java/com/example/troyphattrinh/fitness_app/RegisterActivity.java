@@ -1,52 +1,49 @@
 package com.example.troyphattrinh.fitness_app;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.troyphattrinh.fitness_app.SQL.DatabaseHelper;
-
-import java.util.Random;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class RegisterActivity extends AppCompatActivity {
 
-    DatabaseHelper dbh;
+    private DatabaseHelper dbh;
+    private FirebaseAuth firebaseAuth;
+    private EditText usernameText, passwordText, confirmPasswordText, emailText;
+    private TextView dobText, errorText;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        firebaseAuth = FirebaseAuth.getInstance();
 
     }
 
-
     public void clickRegButton(View v){
-        Intent intent = new Intent(this, ConfirmRegisterActivity.class);
 
-        final EditText usernameText = findViewById(R.id.username_textField);
-        final EditText passwordText = findViewById(R.id.password_textField);
-        final EditText confirmPasswordText = findViewById(R.id.confirm_password_textField);
-        final EditText emailText = findViewById(R.id.email_textField);
-        final TextView dobText = findViewById(R.id.dob_textView);
-        final TextView errorText = findViewById(R.id.error_textView);
+        usernameText = findViewById(R.id.username_textField);
+        passwordText = findViewById(R.id.password_textField);
+        confirmPasswordText = findViewById(R.id.confirm_password_textField);
+        emailText = findViewById(R.id.email_textField);
+        dobText = findViewById(R.id.dob_textView);
+        errorText = findViewById(R.id.error_textView);
 
-
-        //TODO: get user input and record them but dont put in the database yet
-        String username = usernameText.getText().toString();
-        String password = passwordText.getText().toString();
-        String confirmPassword = confirmPasswordText.getText().toString();
-        String dob = dobText.getText().toString();
-        String email = emailText.getText().toString();
+        String username = usernameText.getText().toString().trim();
+        String password = passwordText.getText().toString().trim();
+        String confirmPassword = confirmPasswordText.getText().toString().trim();
+        String dob = dobText.getText().toString().trim();
+        String email = emailText.getText().toString().trim();
 
 
         //TODO: have functions to check validity
@@ -56,26 +53,25 @@ public class RegisterActivity extends AppCompatActivity {
                 dob.length() != 0 &&
                 email.length() != 0 ) {
 
+            //add user info to a local database
             dbh = new DatabaseHelper(this);
             boolean success = dbh.addUser(username, password, dob, email);
 
-            if(success == true){
-                Toast.makeText(RegisterActivity.this, "Register successful!!!", Toast.LENGTH_LONG).show();
+            if(success){
+                //create an account on Firebase server (this feature is just for sending verification email)
+                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            sendVerificationEmail();
+                        }
+                    }
+                });
             }
             else{
-                Toast.makeText(RegisterActivity.this, "OPPS", Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this, "ERROR", Toast.LENGTH_LONG).show();
             }
 
-            //generate a random 4 digit number
-            Random random = new Random();
-            String rand = String.format("%04d", random.nextInt(10000));
-
-
-            intent.putExtra("confirmCode", rand);
-
-            sendEmail(rand);
-
-            startActivity(intent);
             errorText.setText("");
         }
         else{
@@ -85,51 +81,43 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     /* TODO: checks duplicate username in the database */
-    boolean checkUsername(String username){
+    private boolean checkUsername(String username){
         return username.length() >= 1;
     }
 
     /*checks correct requirement for password (minimum 8 characters)*/
-    boolean checkPassword(String password){
+    private boolean checkPassword(String password){
         return password.length() >= 8;
     }
 
     /*compare password and confirmPassword*/
-    boolean checkConfirmPassword(String confirmPassword, String password){
+    private boolean checkConfirmPassword(String confirmPassword, String password){
         boolean check = false;
-
         if(confirmPassword.equals(password)){
             check = true;
         }
-
         return check;
     }
 
-    /*checks format*/
-    boolean checkDOB(String dob){
-        return true;
+    private void sendVerificationEmail(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+        if(firebaseUser != null){
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(RegisterActivity.this, "Register successfully!!!", Toast.LENGTH_LONG).show();
+                        firebaseAuth.signOut();
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(RegisterActivity.this, "Failed to send verification email.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
     }
 
 
-    boolean checkEmail(String email){
-        return true;
-    }
-
-    private void sendEmail(String confirmCode) {
-
-        final EditText emailText = findViewById(R.id.email_textField);
-        String TO = emailText.getText().toString();
-
-        //create an intent with ACTION_SEND action
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-
-        //putting contents to the email
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "FITNESS APP CONFIRMATION CODE");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Your confirmation code is: " + confirmCode);
-
-    }
 }
