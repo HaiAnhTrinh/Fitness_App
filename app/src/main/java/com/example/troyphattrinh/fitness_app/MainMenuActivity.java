@@ -25,17 +25,17 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         //enables the intent to get extra data from another activity
-        Bundle mainMenuData = getIntent().getExtras();
+        //Bundle mainMenuData = getIntent().getExtras();
         //if there is no extra data, don't do anything
         /*if(mainMenuData==null){
             return;
         }
         */
-        String username = mainMenuData.getString("email");
+        //String username = mainMenuData.getString("email");
         final TextView usernameText = findViewById(R.id.username);
 
         //set welcome message
-        usernameText.setText("Welcome " + username);
+        usernameText.setText("Welcome!!!");
 
 
         drawerLayout = findViewById(R.id.drawer_layout);

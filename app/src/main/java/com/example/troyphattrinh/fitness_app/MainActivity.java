@@ -9,7 +9,6 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -73,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         Boolean verified = false;
         FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
         Boolean flag = firebaseUser.isEmailVerified();
+
 
         if(flag){
             verified = true;
