@@ -65,6 +65,9 @@ public class RegisterActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             sendVerificationEmail();
                         }
+                        else{
+                            errorText.setText("User email already exist in the database");
+                        }
                     }
                 });
             }
