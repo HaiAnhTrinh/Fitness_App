@@ -2,18 +2,13 @@ package com.fitness.heartrate;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.DrawFilter;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-
-import android.util.TypedValue;
 import android.view.View;
-
 
 public class RingView extends View{
     private int mTotalHeight,mTotalWidth;
@@ -27,7 +22,6 @@ public class RingView extends View{
     private final int mHeartPaintWidth=60;
     private int mAnimAngle=-1;
     private DrawFilter mDrawFilter;
-
 
     Path path=new Path();
 
@@ -43,7 +37,6 @@ public class RingView extends View{
         mRingAnimPaint.setColor(mContext.getResources().getColor(R.color.pink));
 
         startAnim();
-
     }
 
     @Override
@@ -56,9 +49,7 @@ public class RingView extends View{
         y=h/2;
         mRadius=w/2-mHeartPaintWidth/2;
         mRectf=new RectF(x-mRadius, y-mRadius, x+mRadius, y+mRadius);
-
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -86,7 +77,7 @@ public class RingView extends View{
                 while(mAnimAngle<360){
                     mAnimAngle++;
                     try {
-                        Thread.sleep(30);
+                        Thread.sleep(28);
                     }catch (InterruptedException e){
                         e.printStackTrace();
                     }
@@ -102,9 +93,7 @@ public class RingView extends View{
         StopHeartBeatAnmiFlag = true;
         StartHeartBeatAnmiFlag = false;
     }
-    public void startAnim(){
-        startRingAnim();
-    }
+    public void startAnim(){ startRingAnim();}
 
     public RingView(Context context) {
         super(context);
