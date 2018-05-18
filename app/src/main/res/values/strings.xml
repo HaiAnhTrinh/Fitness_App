@@ -13,4 +13,10 @@
     <string name="email_address">Email Address</string>
     <string name="d_o_b_dd_mm_yyyy">D.O.B (dd/mm/yyyy)</string>
     <string name="register">Register</string>
+
+    <string name="name">Heart Rate</string>
+    <string name="default_text">000</string>
+    <string name="unit">bpm</string>
+    <string name="details">details</string>
+
 </resources>
