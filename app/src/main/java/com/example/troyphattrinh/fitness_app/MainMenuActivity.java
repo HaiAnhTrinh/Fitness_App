@@ -20,11 +20,15 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth firebaseAuth;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        Intent i = getIntent();
+        this.email = i.getStringExtra("email");
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -88,12 +92,20 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
             drawerLayout.closeDrawers();
             startActivity(new Intent(MainMenuActivity.this, HeartRateActivity.class));
         }
+        else if(id == R.id.nav_view_record){
+            drawerLayout.closeDrawers();
+            fragment = new UserInfoActivity();
+        }
         else if(id == R.id.nav_logout){
             drawerLayout.closeDrawers();
             logout();
         }
 
         if(fragment != null){
+
+            Bundle bundle = new Bundle();
+            bundle.putString("EMAIL_KEY", email);
+            fragment.setArguments(bundle);
 
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction fragTransaction= fragManager.beginTransaction();
@@ -115,4 +127,5 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         finish();
         startActivity(new Intent(MainMenuActivity.this, MainActivity.class));
     }
+
 }

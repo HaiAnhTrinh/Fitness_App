@@ -2,6 +2,7 @@ package com.example.troyphattrinh.fitness_app;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -11,6 +12,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_NAME = "USERReg.db";
+    private static final String DATABASE_Health = "USERHealth.db";
+
 
     private static final String TABLE_USER = "User";
 
@@ -19,13 +22,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_PASS = "User_pass";
     private static final String COLUMN_USER_DOB = "User_dob";
     private static final String COLUMN_USER_EMAIL = "User_email";
-
-    /*Create Table Query*/
-    private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_PASS + " TEXT,"
-            + COLUMN_USER_DOB + " TEXT,"
-            + COLUMN_USER_EMAIL + " TEXT" + ")";
 
     /*Drop always follows up with the Create Query*/
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
@@ -36,8 +32,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String UTable = "CREATE TABLE " + TABLE_USER + "("
+                + COLUMN_USER_NAME + " TEXT,"
+                + COLUMN_USER_PASS + " TEXT,"
+                + COLUMN_USER_DOB + " TEXT,"
+                + COLUMN_USER_EMAIL + " TEXT" + ")";
 
-        db.execSQL(CREATE_USER_TABLE);
+
+        db.execSQL(UTable);
     }
 
     @Override
@@ -65,5 +67,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor getUser(String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT User_name, User_dob, User_email FROM User WHERE User_email = " + "'" + email + "'"  , null);
+        return data;
+    }
 
 }

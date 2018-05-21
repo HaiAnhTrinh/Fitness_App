@@ -29,6 +29,14 @@
             android:icon="@drawable/footstep_icon"
             android:title="Footstep counter"
             android:visible="true" />
+
+        <item
+            android:id="@+id/nav_view_record"
+            android:checkable="true"
+            android:enabled="true"
+            android:title="User Information"
+            android:visible="true" />
+
         <item
             android:id="@+id/nav_logout"
             android:checkable="true"

@@ -71,12 +71,17 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkEmailVerification(){
         Boolean verified = false;
         FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
+        String emailString = firebaseUser.getEmail().toString();
 
 
         if(firebaseUser.isEmailVerified()){
             verified = true;
             finish();
-            startActivity(new Intent(MainActivity.this, MainMenuActivity.class));
+
+            Intent i = new Intent(MainActivity.this, MainMenuActivity.class);
+            i.putExtra("email", emailString);
+
+            startActivity(i);
         }
         else{
             Toast.makeText(MainActivity.this, "PLEASE VERIFY YOUR EMAIL", Toast.LENGTH_LONG).show();

@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private DatabaseHelper dbh;
+    DatabaseHelper dbh;
     private FirebaseAuth firebaseAuth;
     private EditText usernameText, passwordText, confirmPasswordText, emailText;
     private TextView dobText, errorText;
