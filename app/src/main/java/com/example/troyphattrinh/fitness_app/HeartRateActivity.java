@@ -7,6 +7,9 @@ import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -15,7 +18,9 @@ import android.widget.TextView;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class HeartRateActivity extends AppCompatActivity {
+
+public class HeartRateActivity extends AppCompatActivity{
+    RingView mringview;
 
     public void btnDetailsClick(View view){
         Intent intent=new Intent(this,DetailsActivity.class);
@@ -32,7 +37,6 @@ public class HeartRateActivity extends AppCompatActivity {
     private static TextView text = null;
 
     private static PowerManager.WakeLock wakeLock = null;
-
 
     public static enum TYPE {
         GREEN, RED
@@ -53,11 +57,12 @@ public class HeartRateActivity extends AppCompatActivity {
 
     private static int averageIndex=0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_heartrate);
+
+        mringview=(RingView)findViewById(R.id.ringview);
 
         preview=(SurfaceView)findViewById(R.id.preview);
         previewHolder=preview.getHolder();
@@ -69,8 +74,8 @@ public class HeartRateActivity extends AppCompatActivity {
 
         PowerManager pm=(PowerManager)getSystemService(Context.POWER_SERVICE);
         wakeLock=pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
-
     }
+
     @Override
     public void onResume(){
         super.onResume();
@@ -79,6 +84,7 @@ public class HeartRateActivity extends AppCompatActivity {
         camera=Camera.open();
         startTime=System.currentTimeMillis();
     }
+
     @Override
     public void onPause(){
         super.onPause();
@@ -88,11 +94,40 @@ public class HeartRateActivity extends AppCompatActivity {
         camera.stopPreview();
         camera.release();
         camera=null;
-
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+    }
+
     @Override
     public void onConfigurationChanged(Configuration configuration){
         super.onConfigurationChanged(configuration);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.content_heartrate, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.action_retry:
+                text.setText(R.string.default_text);
+                startCam();
+                mringview.startAnim();
+                return true;
+            case R.id.action_ok:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private static Camera.PreviewCallback previewCallback=new Camera.PreviewCallback() {
@@ -147,6 +182,7 @@ public class HeartRateActivity extends AppCompatActivity {
 
             long endTime = System.currentTimeMillis();
             double totalTimeInSecs = (endTime - startTime) / 1000d;
+
             if (totalTimeInSecs >= 10) {
                 double bps = (beats / totalTimeInSecs);
                 int dpm = (int) (bps * 60d);
@@ -166,6 +202,7 @@ public class HeartRateActivity extends AppCompatActivity {
 
                 int beatsArrayAvg = 0;
                 int beatsArrayCnt = 0;
+
                 for (int i = 0; i < beatsArray.length; i++) {
                     if (beatsArray[i] > 0) {
                         beatsArrayAvg += beatsArray[i];
@@ -174,13 +211,24 @@ public class HeartRateActivity extends AppCompatActivity {
                 }
                 int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
                 //heartrate
-                text.setText(String.valueOf(beatsArrayAvg));
+                text.setText(String.valueOf(beatsAvg));
+
                 startTime = System.currentTimeMillis();
                 beats = 0;
+                stopCam();
             }
             processing.set(false);
         }
     };
+
+    public static void stopCam(){
+        camera.stopPreview();
+    }
+
+    public static void startCam(){
+        camera.startPreview();
+        startTime=System.currentTimeMillis();
+    }
 
     private static SurfaceHolder.Callback surfaceCallback=new SurfaceHolder.Callback() {
         @Override
@@ -204,13 +252,10 @@ public class HeartRateActivity extends AppCompatActivity {
             }
             camera.setParameters(parameters);
             camera.startPreview();
-
         }
 
         @Override
-
         public void surfaceDestroyed(SurfaceHolder holder) {
-
         }
     };
 
@@ -229,7 +274,6 @@ public class HeartRateActivity extends AppCompatActivity {
                 }
             }
         }
-
         return result;
     }
 }

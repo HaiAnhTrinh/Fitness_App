@@ -71,10 +71,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkEmailVerification(){
         Boolean verified = false;
         FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
-        Boolean flag = firebaseUser.isEmailVerified();
 
 
-        if(flag){
+        if(firebaseUser.isEmailVerified()){
             verified = true;
             finish();
             startActivity(new Intent(MainActivity.this, MainMenuActivity.class));

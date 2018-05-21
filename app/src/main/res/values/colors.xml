@@ -10,6 +10,7 @@
     <color name="colorAccent">#ff4081</color>
     <color name="pink">#edf3534a</color>
     <color name="white">#fdfbfb</color>
+    <color name="black">#000000</color>
 
     <color name="red">#D95238</color>
     <color name="heart_default">#E48674</color>

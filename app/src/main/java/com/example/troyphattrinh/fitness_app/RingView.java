@@ -35,12 +35,12 @@ public class RingView extends View{
         setLayerType(View.LAYER_TYPE_SOFTWARE,null);
         mRingPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         if(!isInEditMode()){
-            mRingPaint.setColor(255);
+            mRingPaint.setColor(mContext.getResources().getColor(R.color.translucent));
         }
         mRingPaint.setStrokeWidth(mHeartPaintWidth);
         mRingPaint.setStyle(Style.STROKE);
         mRingAnimPaint=new Paint(mRingPaint);
-        mRingAnimPaint.setColor(255);
+        mRingAnimPaint.setColor(mContext.getResources().getColor(R.color.pink));
 
         startAnim();
 

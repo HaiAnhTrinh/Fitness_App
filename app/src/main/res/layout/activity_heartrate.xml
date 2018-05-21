@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:padding="10dp">
 
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
@@ -34,7 +35,8 @@
         android:layout_height="380dp"
         android:background="@color/rippelColor">
 
-        <com.fitness.heartrate.RingView
+        <com.example.troyphattrinh.fitness_app.RingView
+            android:id="@+id/ringview"
             android:layout_width="280dp"
             android:layout_height="280dp"
             android:layout_centerInParent="true"/>
@@ -64,11 +66,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                    <com.fitness.heartrate.HeartbeatView
+                    <com.example.troyphattrinh.fitness_app.HeartbeatView
                         android:id="@+id/image"
                         android:layout_width="match_parent"
                         android:layout_height="75dp">
-                    </com.fitness.heartrate.HeartbeatView>
+                    </com.example.troyphattrinh.fitness_app.HeartbeatView>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -88,9 +90,7 @@
     <Button
         android:id="@+id/btnDetails"
         android:onClick="btnDetailsClick"
-        android:drawableLeft="@drawable/icon"
-        android:paddingLeft="120dp"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:drawablePadding="10dp"
         android:text="@string/details"
         android:textStyle="bold"

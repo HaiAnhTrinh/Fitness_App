@@ -95,11 +95,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     /*compare password and confirmPassword*/
     private boolean checkConfirmPassword(String confirmPassword, String password){
-        boolean check = false;
-        if(confirmPassword.equals(password)){
-            check = true;
-        }
-        return check;
+
+        return confirmPassword.equals(password);
+
     }
 
     private void sendVerificationEmail(){
