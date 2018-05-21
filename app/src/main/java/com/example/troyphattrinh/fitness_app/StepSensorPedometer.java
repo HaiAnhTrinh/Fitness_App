@@ -6,11 +6,15 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+
+
 public class StepSensorPedometer extends StepSensorBase {
     private final String TAG = "StepSensorPedometer";
     private int liveStep = 0;
     private int sensorMode = 0;
-
+    SimpleDateFormat sdf = new SimpleDateFormat("hh-ss");
+    String time = sdf.format(new java.util.Date());
     public StepSensorPedometer(Context context, StepCallBack stepCallBack) {
         super(context, stepCallBack);
     }
@@ -43,17 +47,18 @@ public class StepSensorPedometer extends StepSensorBase {
         liveStep = (int) event.values[0];
         if (sensorMode == 0) {
             Log.i(TAG, "Detector Steps："+liveStep);
-            StepSensorBase.CURRENT_SETP += liveStep;
+            StepSensorBase.CURRENT_STEP2 += liveStep;
+            if(time.equals("00-00")){
+                StepSensorBase.CURRENT_STEP2 = 0;
+            }
         } else if (sensorMode == 1) {
             Log.i(TAG, "Counter Steps："+liveStep);
-            StepSensorBase.CURRENT_SETP = liveStep;
+            StepSensorBase.CURRENT_STEP1 = liveStep;
         }
-        stepCallBack.Step(StepSensorBase.CURRENT_SETP);
+        stepCallBack.Step(StepSensorBase.CURRENT_STEP1, StepSensorBase.CURRENT_STEP2);
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
-
-
 }
