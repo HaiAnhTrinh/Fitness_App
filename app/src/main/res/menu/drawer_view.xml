@@ -38,6 +38,13 @@
             android:visible="true" />
 
         <item
+            android:id="@+id/nav_view_health"
+            android:checkable="true"
+            android:enabled="true"
+            android:title="Health record"
+            android:visible="true" />
+
+        <item
             android:id="@+id/nav_logout"
             android:checkable="true"
             android:enabled="true"

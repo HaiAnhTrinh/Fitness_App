@@ -90,11 +90,15 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         }
         else if(id == R.id.nav_heart_rate){
             drawerLayout.closeDrawers();
-            startActivity(new Intent(MainMenuActivity.this, HeartRateActivity.class));
+            fragment = new HeartRateActivity();
         }
         else if(id == R.id.nav_view_record){
             drawerLayout.closeDrawers();
             fragment = new UserInfoActivity();
+        }
+        else if(id == R.id.nav_view_health){
+            drawerLayout.closeDrawers();
+            fragment = new HealthInfo();
         }
         else if(id == R.id.nav_logout){
             drawerLayout.closeDrawers();

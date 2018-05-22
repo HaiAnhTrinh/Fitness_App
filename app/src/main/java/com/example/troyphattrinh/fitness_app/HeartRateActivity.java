@@ -1,31 +1,30 @@
 package com.example.troyphattrinh.fitness_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.os.PowerManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.content.Intent;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
-public class HeartRateActivity extends AppCompatActivity{
+public class HeartRateActivity extends android.support.v4.app.Fragment{
     RingView mringview;
+    Button detailsBtn;
 
-    public void btnDetailsClick(View view){
-        Intent intent=new Intent(this,DetailsActivity.class);
-        startActivity(intent);
-    }
 
     private static final String TAG = "HeartRate";
     private static final AtomicBoolean processing = new AtomicBoolean(false);
@@ -57,23 +56,41 @@ public class HeartRateActivity extends AppCompatActivity{
 
     private static int averageIndex=0;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_heartrate);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mringview=(RingView)findViewById(R.id.ringview);
+        return inflater.inflate(R.layout.activity_heartrate, null);
+    }
 
-        preview=(SurfaceView)findViewById(R.id.preview);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+
+        mringview=view.findViewById(R.id.ringview);
+        detailsBtn=view.findViewById(R.id.btnDetails);
+        preview=view.findViewById(R.id.preview);
         previewHolder=preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
         previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-        image=findViewById(R.id.image);
-        text=(TextView)findViewById(R.id.text);
+        image=view.findViewById(R.id.image);
+        text=view.findViewById(R.id.text);
 
-        PowerManager pm=(PowerManager)getSystemService(Context.POWER_SERVICE);
+        PowerManager pm=(PowerManager)getActivity().getSystemService(Context.POWER_SERVICE);
         wakeLock=pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
+
+        detailsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(),DetailsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -107,10 +124,9 @@ public class HeartRateActivity extends AppCompatActivity{
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater=getMenuInflater();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.content_heartrate, menu);
-        return true;
+        super.onCreateOptionsMenu(menu,inflater);
     }
 
 
@@ -123,7 +139,7 @@ public class HeartRateActivity extends AppCompatActivity{
                 mringview.startAnim();
                 return true;
             case R.id.action_ok:
-                finish();
+                getActivity().finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
