@@ -6,15 +6,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
-
 
 public class StepSensorPedometer extends StepSensorBase {
     private final String TAG = "StepSensorPedometer";
     private int liveStep = 0;
     private int sensorMode = 0;
-    SimpleDateFormat sdf = new SimpleDateFormat("hh-ss");
-    String time = sdf.format(new java.util.Date());
+    private int b = 0;
+    static boolean isRun = true;
     public StepSensorPedometer(Context context, StepCallBack stepCallBack) {
         super(context, stepCallBack);
     }
@@ -27,10 +25,11 @@ public class StepSensorPedometer extends StepSensorBase {
             isAvailable = true;
             sensorMode = 0;
             Log.i(TAG, "Detector Available！");
-        } else if (sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_GAME)) {
-            isAvailable = true;
-            sensorMode = 1;
-            Log.i(TAG, "Counter Available！");
+        }
+        else if (sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_GAME)) {
+                isAvailable = true;
+                sensorMode = 1;
+                Log.i(TAG, "Counter Available！");
         } else {
             isAvailable = false;
             Log.i(TAG, "Unavailable");
@@ -45,17 +44,22 @@ public class StepSensorPedometer extends StepSensorBase {
     @Override
     public void onSensorChanged(SensorEvent event) {
         liveStep = (int) event.values[0];
+        if(isRun){
+            b = liveStep;
+            isRun = false;
+        }
         if (sensorMode == 0) {
             Log.i(TAG, "Detector Steps："+liveStep);
-            StepSensorBase.CURRENT_STEP2 += liveStep;
-            if(time.equals("00-00")){
-                StepSensorBase.CURRENT_STEP2 = 0;
-            }
+            StepSensorBase.CURRENT_STEP += liveStep;
         } else if (sensorMode == 1) {
             Log.i(TAG, "Counter Steps："+liveStep);
-            StepSensorBase.CURRENT_STEP1 = liveStep;
+            StepSensorBase.CURRENT_STEP = liveStep - b;
         }
-        stepCallBack.Step(StepSensorBase.CURRENT_STEP1, StepSensorBase.CURRENT_STEP2);
+        stepCallBack.Step(StepSensorBase.CURRENT_STEP);
+    }
+
+    public static void setIsRun(boolean c){
+        isRun = c;
     }
 
     @Override
