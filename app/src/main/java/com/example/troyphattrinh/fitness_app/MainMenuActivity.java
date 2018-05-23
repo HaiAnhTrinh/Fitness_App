@@ -87,6 +87,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         }
         else if(id == R.id.nav_foot_step){
             drawerLayout.closeDrawers();
+            fragment = new FootstepActivity();
         }
         else if(id == R.id.nav_heart_rate){
             drawerLayout.closeDrawers();

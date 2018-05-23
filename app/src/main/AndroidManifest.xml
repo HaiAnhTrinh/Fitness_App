@@ -26,10 +26,8 @@
             android:parentActivityName=".MainActivity"/>
 
         <activity android:name=".MainMenuActivity" />
-        <activity android:name=".HeartRateActivity"/>
         <activity
-            android:name=".DetailsActivity"
-            android:parentActivityName=".HeartRateActivity"/>
+            android:name=".DetailsActivity" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
