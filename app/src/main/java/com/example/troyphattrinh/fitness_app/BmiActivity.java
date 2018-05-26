@@ -46,17 +46,17 @@ public class BmiActivity extends Fragment {
 
     private void bmi (){
 
-
         String weightValue = weightTf.getText().toString();
         String heightValue = heightTf.getText().toString();
+        Float weightVl = Float.parseFloat(weightValue);
+        Float heightVl = Float.parseFloat(heightValue)/100;
 
         String bmiResult = "";
 
 
-        if(weightValue != null && heightValue != null)
+        if(weightValue != null && heightValue != null
+                && weightVl > 0 && heightVl > 0 )
         {
-            Float weightVl = Float.parseFloat(weightValue);
-            Float heightVl = Float.parseFloat(heightValue)/100;
 
             Float bmi = (weightVl/heightVl)/heightVl;
 
@@ -79,9 +79,12 @@ public class BmiActivity extends Fragment {
                 bmiResult = "You are obese !!!";
             }
 
+            result.setText(bmiResult);
         }
-
-        result.setText(bmiResult);
+        else
+            {
+                result.setText("Invalid input");
+            }
 
     }
 

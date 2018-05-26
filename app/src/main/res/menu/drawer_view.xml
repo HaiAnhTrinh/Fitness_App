@@ -14,6 +14,7 @@
             android:checkable="true"
             android:enabled="true"
             android:title="Calculate BMI"
+            android:icon="@drawable/bmi_icondrawer"
             android:visible="true" />
         <item
             android:id="@+id/nav_heart_rate"
