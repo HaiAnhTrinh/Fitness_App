@@ -9,11 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    /*Version of the current database. As we make changes to the database itself such as new column, the version is incremented*/
     private static final int DATABASE_VERSION = 1;
 
+    /*Name of database of the whole project*/
     private static final String DATABASE_NAME = "FitnessApp.db";
 
 
+    /*Create Names for each activities that uses database*/
     private static final String TABLE_USER = "User";
     private static final String TABLE_HEARTRATE = "HeartRate";
     private static final String TABLE_STEPS = "Steps";
@@ -27,15 +30,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_HEARTRATE = "User_HeartRate";
     private static final String COLUMN_USER_STEPS= "User_Steps";
 
-    /*Drop always follows up with the Create Query*/
+    /*Drop function will completely delete a table*/
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
     private String DROP_HR_TABLE = "DROP TABLE IF EXISTS " + TABLE_HEARTRATE;
     private String DROP_STEP_TABLE = "DROP TABLE IF EXISTS " + TABLE_STEPS;
 
+    
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /*When the databasehelper is called it will create 3 tables correspoding to each activities in the app*/
     @Override
     public void onCreate(SQLiteDatabase db) {
         String UTable = "CREATE TABLE " + TABLE_USER + "("
@@ -53,11 +58,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_USER_STEPS + " TEXT" + ")";
 
 
+        /*Execute each table after created*/
         db.execSQL(UTable);
         db.execSQL(HRTable);
         db.execSQL(StepsTable);
     }
 
+    /*When a version is changed, the database will delete all data from previous version through DROP_TABLE.*/
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVer, int newVer) {
         db.execSQL(DROP_USER_TABLE);
@@ -87,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /*Cursor will take in the */
     public Cursor getUser(String email){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT User_name, User_dob, User_email FROM User WHERE User_email = " + "'" + email + "'"  , null);
