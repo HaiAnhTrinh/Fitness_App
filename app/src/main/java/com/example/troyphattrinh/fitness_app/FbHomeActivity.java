@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class HomeActivity extends Fragment {
+public class FbHomeActivity extends Fragment {
 
     @Nullable
     @Override
@@ -25,8 +25,7 @@ public class HomeActivity extends Fragment {
         final TextView welcomeTextView = view.findViewById(R.id.welcome);
 
         //set welcome message
-        welcomeTextView.setText("Welcome!!!");
-
+        welcomeTextView.setText("WELCOME!!!");
 
     }
 }

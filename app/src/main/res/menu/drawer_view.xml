@@ -4,54 +4,35 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:checkable="true"
-            android:enabled="true"
             android:icon="@drawable/home_icon"
-            android:title="Home"
-            android:visible="true" />
+            android:title="Home" />
         <item
             android:id="@+id/nav_cal_bmi"
-            android:checkable="true"
-            android:enabled="true"
             android:title="Calculate BMI"
-            android:icon="@drawable/bmi_icondrawer"
-            android:visible="true" />
+            android:icon="@drawable/bmi_icon_drawer" />
         <item
             android:id="@+id/nav_heart_rate"
-            android:checkable="true"
-            android:enabled="true"
-            android:icon="@drawable/heartrate_icon"
-            android:title="Heart Rate"
-            android:visible="true" />
+            android:icon="@drawable/heart_rate_icon"
+            android:title="Heart Rate" />
         <item
             android:id="@+id/nav_foot_step"
-            android:checkable="true"
-            android:enabled="true"
             android:icon="@drawable/footstep_icon"
-            android:title="Footstep counter"
-            android:visible="true" />
+            android:title="Footstep counter" />
 
         <item
             android:id="@+id/nav_view_record"
-            android:checkable="true"
-            android:enabled="true"
-            android:title="User Information"
-            android:visible="true" />
+            android:icon="@drawable/ic_action_name"
+            android:title="User Information" />
 
         <item
             android:id="@+id/nav_view_health"
-            android:checkable="true"
-            android:enabled="true"
-            android:title="Health record"
-            android:visible="true" />
+            android:icon="@drawable/ic_health_record"
+            android:title="Health record" />
 
         <item
             android:id="@+id/nav_logout"
-            android:checkable="true"
-            android:enabled="true"
             android:icon="@drawable/ic_power_settings_new_black_24dp"
-            android:title="Logout"
-            android:visible="true" />
+            android:title="Logout" />
     </group>
 
 </menu>

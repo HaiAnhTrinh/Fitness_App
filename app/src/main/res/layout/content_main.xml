@@ -45,11 +45,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="158dp"
-        android:width="240dp"
+        android:width="220dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toEndOf="@+id/emailTextView"
         app:layout_constraintTop_toBottomOf="@+id/Title" />
 
@@ -71,11 +71,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="19dp"
-        android:width="240dp"
+        android:width="220dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.69"
         app:layout_constraintStart_toEndOf="@+id/passwordTextView"
         app:layout_constraintTop_toBottomOf="@+id/emailText" />
 
@@ -123,7 +123,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Title"
         app:layout_constraintVertical_bias="0.324"
-        app:srcCompat="@drawable/heartrate_icon" />
+        app:srcCompat="@drawable/heart_rate_icon" />
 
 
     <TextView
@@ -138,9 +138,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77" />
+        app:layout_constraintVertical_bias="0.66" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/fb_login_button"

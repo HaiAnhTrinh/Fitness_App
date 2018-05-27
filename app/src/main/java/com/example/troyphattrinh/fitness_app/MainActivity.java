@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.FacebookSdk;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private AccessTokenTracker accessTokenTracker;
     private ProfileTracker profileTracker;
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(this);
+
         setContentView(R.layout.activity_main);
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -78,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         accessTokenTracker.startTracking();
         profileTracker.startTracking();
 
-        LoginButton loginButton = (LoginButton) findViewById(R.id.fb_login_button);
+        LoginButton loginButton = findViewById(R.id.fb_login_button);
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "user_friends"));
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>()
@@ -153,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
 
             Intent i = new Intent(MainActivity.this, MainMenuActivity.class);
-            i.putExtra("email", emailString);
+            i.putExtra("normalEmail", emailString);
 
             startActivity(i);
         }
@@ -191,9 +197,10 @@ public class MainActivity extends AppCompatActivity {
     {
         if(profile != null)
         {
-            Intent main = new Intent(MainActivity.this, FbUserInfo.class);
+            Intent main = new Intent(MainActivity.this, FbMainMenuActivity.class);
+           // main.putExtra("email", profile.getLinkUri());
             main.putExtra("name", profile.getFirstName());
-            main.putExtra("avatar", profile.getProfilePictureUri(200,200).toString());
+            main.putExtra("avatar", profile.getProfilePictureUri(400,350).toString());
             finish();
             startActivity(main);
         }

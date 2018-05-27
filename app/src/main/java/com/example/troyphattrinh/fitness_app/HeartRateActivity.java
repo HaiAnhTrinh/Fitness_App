@@ -25,7 +25,6 @@ public class HeartRateActivity extends android.support.v4.app.Fragment{
     RingView mringview;
     Button detailsBtn;
 
-
     private static final String TAG = "HeartRate";
     private static final AtomicBoolean processing = new AtomicBoolean(false);
 

@@ -45,22 +45,21 @@ public class HealthInfo extends Fragment {
             @Override
             public void onClick(View view) {
 
-                dbh.addHRate(100, "trinhhaianh37@gmail.com");
-
                 //populate an ArrayList<String> from the database and then view it
                 ArrayList<String> theList = new ArrayList<>();
                 Cursor data = dbh.getHRate(email);
                 if (data.getCount() == 0) {
                     Toast.makeText(view.getContext(), "There are no contents in this list!", Toast.LENGTH_LONG).show();
-                } else {
+                    return;
+                }
+
+                StringBuffer buffer = new StringBuffer();
                     while (data.moveToNext()) {
-                        theList.add(data.getString(0));
-                        theList.add(data.getString(1));
+                        buffer.append(data.getString(0));
+                        buffer.append(data.getString(1));
                         ListAdapter listAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, theList);
                         listView.setAdapter(listAdapter);
                     }
-
-                }
             }
         });
 

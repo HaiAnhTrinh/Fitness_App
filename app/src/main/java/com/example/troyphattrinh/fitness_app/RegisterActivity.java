@@ -1,9 +1,11 @@
 package com.example.troyphattrinh.fitness_app;
 
+import android.app.DatePickerDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +15,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Calendar;
+
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -20,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private EditText usernameText, passwordText, confirmPasswordText, emailText;
     private TextView dobText, errorText;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
 
 
     @Override
@@ -27,11 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         firebaseAuth = FirebaseAuth.getInstance();
-
-    }
-
-    public void clickRegButton(View v){
-
         usernameText = findViewById(R.id.username_textField);
         passwordText = findViewById(R.id.password_textField);
         confirmPasswordText = findViewById(R.id.confirm_password_textField);
@@ -39,14 +39,45 @@ public class RegisterActivity extends AppCompatActivity {
         dobText = findViewById(R.id.dob_textView);
         errorText = findViewById(R.id.error_textView);
 
+
+        dobText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        RegisterActivity.this,
+                        dateSetListener,
+                        day, month, year);
+                dialog.show();
+            }
+        });
+
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month +1;
+
+                String date = dayOfMonth + "/" + month + "/" + year;
+                dobText.setText(date);
+            }
+
+        };
+
+
+    }
+
+    public void clickRegButton(View v){
+
         String username = usernameText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
         String confirmPassword = confirmPasswordText.getText().toString().trim();
         String dob = dobText.getText().toString().trim();
         String email = emailText.getText().toString().trim();
 
-
-        //TODO: have functions to check validity
         if(     checkUsername(username) &&
                 checkPassword(password) &&
                 checkConfirmPassword(confirmPassword, password) &&
@@ -83,14 +114,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    /* TODO: checks duplicate username in the database */
     private boolean checkUsername(String username){
         return username.length() >= 1;
     }
 
     /*checks correct requirement for password (minimum 8 characters)*/
     private boolean checkPassword(String password){
-        return password.length() >= 8;
+        return password.length() >= 5;
     }
 
     /*compare password and confirmPassword*/
@@ -119,6 +149,5 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
     }
-
 
 }
