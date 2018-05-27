@@ -72,11 +72,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void clickRegButton(View v){
 
-        String username = usernameText.getText().toString().trim();
-        String password = passwordText.getText().toString().trim();
-        String confirmPassword = confirmPasswordText.getText().toString().trim();
-        String dob = dobText.getText().toString().trim();
-        String email = emailText.getText().toString().trim();
+        final String username = usernameText.getText().toString().trim();
+        final String password = passwordText.getText().toString().trim();
+        final String confirmPassword = confirmPasswordText.getText().toString().trim();
+        final String dob = dobText.getText().toString().trim();
+        final String email = emailText.getText().toString().trim();
 
         if(     checkUsername(username) &&
                 checkPassword(password) &&
