@@ -24,6 +24,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class HeartRateActivity extends android.support.v4.app.Fragment{
     RingView mringview;
     Button detailsBtn;
+    DatabaseHelper dbh;
+    String email;
+    static int heartRate;
 
     private static final String TAG = "HeartRate";
     private static final AtomicBoolean processing = new AtomicBoolean(false);
@@ -66,6 +69,8 @@ public class HeartRateActivity extends android.support.v4.app.Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
+        dbh = new DatabaseHelper(this.getContext());
+        email = this.getArguments().getString("EMAIL_KEY");
 
         mringview=view.findViewById(R.id.ringview);
         detailsBtn=view.findViewById(R.id.btnDetails);
@@ -138,7 +143,7 @@ public class HeartRateActivity extends android.support.v4.app.Fragment{
                 mringview.startAnim();
                 return true;
             case R.id.action_ok:
-                getActivity().finish();
+                dbh.addHRate(heartRate, email);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -227,6 +232,7 @@ public class HeartRateActivity extends android.support.v4.app.Fragment{
                 int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
                 //heartrate
                 text.setText(String.valueOf(beatsAvg));
+                dbh.addHRate(heartRate, email);
 
                 startTime = System.currentTimeMillis();
                 beats = 0;
