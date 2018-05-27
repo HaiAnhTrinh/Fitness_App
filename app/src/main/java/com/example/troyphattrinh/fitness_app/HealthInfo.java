@@ -84,23 +84,6 @@ public class HealthInfo extends Fragment {
             }
         });
 
-        //populate an ArrayList<String> from the database and then view it
-//        ArrayList<String> theList = new ArrayList<>();
-//        Cursor data = dbh.getUser(email);
-//        if (data.getCount() == 0) {
-//            Toast.makeText(view.getContext(), "There are no contents in this list!", Toast.LENGTH_LONG).show();
-//        } else {
-//            while (data.moveToNext()) {
-//                theList.add(data.getString(0));
-//                theList.add(data.getString(1));
-//                theList.add(data.getString(2));
-//                ListAdapter listAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, theList);
-//                listView.setAdapter(listAdapter);
-//            }
-//
-//
-//        }
-
     }
 
 }
