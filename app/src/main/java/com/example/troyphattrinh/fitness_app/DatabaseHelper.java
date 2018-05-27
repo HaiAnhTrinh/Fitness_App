@@ -125,7 +125,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /*Cursor will take in the the sql command (query) to return the fields from table HeartRate*/
     public Cursor getHRate (String email){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT User_email, User_HeartRate FROM HeartRate WHERE Hr_email = " + "'" + email + "'"  , null);
+        Cursor data = db.rawQuery("SELECT User_email, User_HeartRate FROM HeartRate WHERE User_email = " + "'" + email + "'"  , null);
         return data;
     }
 
