@@ -7,15 +7,16 @@
     android:background="@color/colorWhite"
     tools:context=".MainActivity">
 
-    <TextView
+     <TextView
         android:id="@+id/step_text1"
         android:layout_width="377dp"
-        android:layout_height="83dp"
+        android:layout_height="70dp"
+        android:text="0 Step"
         android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
         android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/clearBtn"
