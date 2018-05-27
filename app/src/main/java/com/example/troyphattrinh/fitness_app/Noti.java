@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 
+//the notifications 
 public class Noti {
     public static void showNotification(MainActivity context) {
         android.app.Notification notification = new NotificationCompat.Builder(context)
