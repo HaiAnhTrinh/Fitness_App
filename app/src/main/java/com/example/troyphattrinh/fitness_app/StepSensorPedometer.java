@@ -11,12 +11,15 @@ public class StepSensorPedometer extends StepSensorBase {
     private final String TAG = "StepSensorPedometer";
     private int liveStep = 0;
     private int sensorMode = 0;
+    //It is used to save the value that the sensor has when user open the application at the first time.
     private int b = 0;
+    //the switch
     static boolean isRun = true;
     public StepSensorPedometer(Context context, StepCallBack stepCallBack) {
         super(context, stepCallBack);
     }
 
+    //registe the suitable sensor
     @Override
     protected void registerStepListener() {
         Sensor detectorSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
@@ -40,14 +43,17 @@ public class StepSensorPedometer extends StepSensorBase {
     public void unregisterStep() {
         sensorManager.unregisterListener(this);
     }
-
+    
+    //use the suitable sensor
     @Override
     public void onSensorChanged(SensorEvent event) {
         liveStep = (int) event.values[0];
+        //save the initial value
         if(isRun){
             b = liveStep;
             isRun = false;
         }
+        //use the suitable sensor
         if (sensorMode == 0) {
             Log.i(TAG, "Detector Steps："+liveStep);
             StepSensorBase.CURRENT_STEP += liveStep;
@@ -58,6 +64,7 @@ public class StepSensorPedometer extends StepSensorBase {
         stepCallBack.Step(StepSensorBase.CURRENT_STEP);
     }
 
+    //reset the switch when click the clear button
     public static void setIsRun(boolean c){
         isRun = c;
     }
