@@ -85,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_EMAIL, email);
 
         long success = db.insert(TABLE_USER, null, values);
-
+     /*Condition for the funtion to add data into the dtb*/
         if(success == -1){
             return false;
         }
@@ -94,7 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    /*Cursor will take in the */
+    /*Cursor will take in the the sql command (query) to return the fields from table User */
     public Cursor getUser(String email){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT User_name, User_dob, User_email FROM User WHERE User_email = " + "'" + email + "'"  , null);
@@ -111,7 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_EMAIL, email);
 
         long success = db.insert(TABLE_HEARTRATE, null, values);
-
+    /*Condition for the funtion to add data into the dtb*/
         if(success == -1){
             return false;
         }
@@ -120,6 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /*Cursor will take in the the sql command (query) to return the fields from table HeartRate*/
     public Cursor getHRate (String email){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT Hr_email, User_HeartRate FROM HeartRate WHERE Hr_email = " + "'" + email + "'"  , null);
@@ -136,7 +137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_EMAIL, email);
 
         long success = db.insert(TABLE_STEPS, null, values);
-
+     /*Condition for the funtion to add data into the dtb*/
         if(success == -1){
             return false;
         }
@@ -144,7 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-
+    /*Cursor will take in the the sql command (query) to return the fields from table Steps*/
     public Cursor getSteps (String email){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT User_email, User_Steps FROM Steps WHERE User_email = " + "'" + email + "'"  , null);
