@@ -10,13 +10,17 @@ import android.util.Log;
 public class StepSensorPedometer extends StepSensorBase {
     private final String TAG = "StepSensorPedometer";
     private int liveStep = 0;
+    //the type of the sensor
     private int sensorMode = 0;
+    //the initial value
     private int b = 0;
+    //the switch
     static boolean isRun = true;
     public StepSensorPedometer(Context context, StepCallBack stepCallBack) {
         super(context, stepCallBack);
     }
 
+    //choose the suitable sensor
     @Override
     protected void registerStepListener() {
         Sensor detectorSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
@@ -43,11 +47,14 @@ public class StepSensorPedometer extends StepSensorBase {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        //get the value
         liveStep = (int) event.values[0];
+        //save the value
         if(isRun){
             b = liveStep;
             isRun = false;
         }
+        //choose the sensor
         if (sensorMode == 0) {
             Log.i(TAG, "Detector Steps："+liveStep);
             StepSensorBase.CURRENT_STEP += liveStep;
@@ -58,6 +65,7 @@ public class StepSensorPedometer extends StepSensorBase {
         stepCallBack.Step(StepSensorBase.CURRENT_STEP);
     }
 
+    //reset the switch
     public static void setIsRun(boolean c){
         isRun = c;
     }
