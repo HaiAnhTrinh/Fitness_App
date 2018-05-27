@@ -39,13 +39,14 @@ public class FbMainMenuActivity extends AppCompatActivity implements NavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        FacebookSdk.sdkInitialize(this);
+        FacebookSdk.sdkInitialize(this); //facebook SDK initialization
 
 //        Intent i = getIntent();
 //        this.email = i.getStringExtra("email");
 
         shareDialog = new ShareDialog(this);
 
+        //getting data from another activity
         Bundle bundle = getIntent().getExtras();
         String fbName = bundle.get("name").toString();
         String fbAvatar = bundle.get("avatar").toString();
@@ -57,7 +58,7 @@ public class FbMainMenuActivity extends AppCompatActivity implements NavigationV
         actionbar.setHomeAsUpIndicator(R.drawable.menu_icon);
         actionbar.setDisplayHomeAsUpEnabled(true);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout); 
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         //handle clicked item of the navigation menu
@@ -160,6 +161,7 @@ public class FbMainMenuActivity extends AppCompatActivity implements NavigationV
     }
 
 
+    //getting profile picture from user's facebook account
     public class DownloadImage extends AsyncTask<String, Void, Bitmap>
     {
         ImageView image;
@@ -192,10 +194,11 @@ public class FbMainMenuActivity extends AppCompatActivity implements NavigationV
         }
     }
 
-
+    
+    //method for logout button
     private void logout(){
         LoginManager.getInstance().logOut();
-        Intent login = new Intent(FbMainMenuActivity.this, MainActivity.class);
+        Intent login = new Intent(FbMainMenuActivity.this, MainActivity.class); //open new activity
         startActivity(login);
         finish();
     }
