@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 public class BmiActivity extends Fragment {
 
+    //initialization 
     EditText heightTf, weightTf;
     TextView result, weight, height;
     Button btn;
@@ -24,10 +25,12 @@ public class BmiActivity extends Fragment {
         return inflater.inflate(R.layout.activity_bmi, null);
     }
 
+    
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //assign value for xml objects
         heightTf = view.findViewById(R.id.heightTf);
         weightTf = view.findViewById(R.id.weightTf);
         result = view.findViewById(R.id.result);
@@ -35,6 +38,7 @@ public class BmiActivity extends Fragment {
         height = view.findViewById(R.id.height);
         btn = view.findViewById(R.id.btn);
 
+        //assign action for a button
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,12 +50,12 @@ public class BmiActivity extends Fragment {
 
     private void bmi (){
 
-        String weightValue = weightTf.getText().toString();
-        String heightValue = heightTf.getText().toString();
-        Float weightVl = Float.parseFloat(weightValue);
-        Float heightVl = Float.parseFloat(heightValue)/100;
+        String weightValue = weightTf.getText().toString(); //return a string representation of an object
+        String heightValue = heightTf.getText().toString(); //return a string representation of an object
+        Float weightVl = Float.parseFloat(weightValue); //return a float value
+        Float heightVl = Float.parseFloat(heightValue)/100; //return a float value
 
-        String bmiResult = "";
+        String bmiResult = ""; //initialization
 
 
         if(weightValue != null && heightValue != null
@@ -79,11 +83,11 @@ public class BmiActivity extends Fragment {
                 bmiResult = "You are obese !!!";
             }
 
-            result.setText(bmiResult);
+            result.setText(bmiResult); //return a string value for bmiResult
         }
         else
             {
-                result.setText("Invalid input");
+                result.setText("Invalid input"); //return a warning message for invalid input value
             }
 
     }
