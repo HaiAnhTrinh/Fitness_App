@@ -11,7 +11,7 @@
         android:id="@+id/step_text1"
         android:layout_width="377dp"
         android:layout_height="70dp"
-        android:text="0 Step"
+        android:text="Steps: 0"
         android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
