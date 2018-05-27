@@ -15,7 +15,7 @@ public class StepSensorPedometer extends StepSensorBase {
     //the initial value
     private int b = 0;
     //the switch
-    static boolean isRun = true;
+    boolean isRun = true;
     public StepSensorPedometer(Context context, StepCallBack stepCallBack) {
         super(context, stepCallBack);
     }
@@ -66,7 +66,7 @@ public class StepSensorPedometer extends StepSensorBase {
     }
 
     //reset the switch
-    public static void setIsRun(boolean c){
+    public void setIsRun(boolean c){
         isRun = c;
     }
 
