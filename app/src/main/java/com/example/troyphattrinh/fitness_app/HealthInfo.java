@@ -52,14 +52,14 @@ public class HealthInfo extends Fragment {
                     Toast.makeText(view.getContext(), "There are no contents in this list!", Toast.LENGTH_LONG).show();
                     return;
                 }
-
-                StringBuffer buffer = new StringBuffer();
+                else{
                     while (data.moveToNext()) {
-                        buffer.append(data.getString(0));
-                        buffer.append(data.getString(1));
+                        theList.add(data.getString(0));
+                        theList.add(data.getString(1));
                         ListAdapter listAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, theList);
                         listView.setAdapter(listAdapter);
                     }
+                }
             }
         });
 
