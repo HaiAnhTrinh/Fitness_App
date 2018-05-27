@@ -39,20 +39,20 @@ public class RegisterActivity extends AppCompatActivity {
         dobText = findViewById(R.id.dob_textView);
         errorText = findViewById(R.id.error_textView);
 
-
-        dobText.setOnClickListener(new View.OnClickListener() {
+        
+        dobText.setOnClickListener(new View.OnClickListener() { //assign action for an EditText object
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
+                int day = calendar.get(Calendar.DAY_OF_MONTH); //assign day value from calendar to day
+                int month = calendar.get(Calendar.MONTH); //assign month value from calendar to month
+                int year = calendar.get(Calendar.YEAR); //assign year value from calendar to year
 
                 DatePickerDialog dialog = new DatePickerDialog(
                         RegisterActivity.this,
                         dateSetListener,
                         day, month, year);
-                dialog.show();
+                dialog.show(); //display the date
             }
         });
 
@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month +1;
 
-                String date = dayOfMonth + "/" + month + "/" + year;
+                String date = dayOfMonth + "/" + month + "/" + year; //initialize value for date 
                 dobText.setText(date);
             }
 
