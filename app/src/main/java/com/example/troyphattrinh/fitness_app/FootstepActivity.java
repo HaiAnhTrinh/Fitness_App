@@ -14,7 +14,8 @@ public class FootstepActivity extends Fragment implements StepSensorBase.StepCal
     private TextView mStepText;
     private StepSensorBase mStepSensor;
     private Button clearBtn;
-
+    private StepSensorPedometer stepSensorPedometer;
+    private boolean isRun = true;
 
     @Override
     public void Step(int stepNum) {
@@ -36,7 +37,18 @@ public class FootstepActivity extends Fragment implements StepSensorBase.StepCal
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        stepSensorPedometer = new StepSensorPedometer(this.getContext(), new StepSensorBase.StepCallBack() {
+            @Override
+            public void Step(int stepNum) {
+
+            }
+        });
+
         clearBtn = view.findViewById(R.id.clearBtn);
+        if(isRun) {
+            StepSensorPedometer.setIsRun(true);
+            isRun = false;
+        }
 
         mStepText = view.findViewById(R.id.step_text1);
         mStepSensor = new StepSensorPedometer(getContext(), this);
@@ -46,9 +58,9 @@ public class FootstepActivity extends Fragment implements StepSensorBase.StepCal
 
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
                 StepSensorPedometer.setIsRun(true);
-                mStepText.setText("Steps: 0");
+                mStepText.setText("Steps:0");
             }
         });
 
