@@ -86,25 +86,20 @@ public class RegisterActivity extends AppCompatActivity {
 
             //add user info to a local database
             dbh = new DatabaseHelper(this);
-            boolean success = dbh.addUser(username, password, dob, email);
-
-            if(success){
+            
                 //create an account on Firebase server (this feature is just for sending verification email)
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             sendVerificationEmail();
+                            dbh.addUser(username, password, dob, email);
                         }
                         else{
                             errorText.setText("User email already exist in the database");
                         }
                     }
                 });
-            }
-            else{
-                Toast.makeText(RegisterActivity.this, "ERROR", Toast.LENGTH_LONG).show();
-            }
 
             errorText.setText("");
         }
