@@ -28,7 +28,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_DOB = "User_dob";
     private static final String COLUMN_USER_EMAIL = "User_email";
     /*Heartrate Table*/
-    private static final String COLUMN_HEARTRATE_EMAIL = "Hr_email";
     private static final String COLUMN_USER_HEARTRATE = "User_HeartRate";
     /*Steps Table*/
     private static final String COLUMN_USER_STEPS= "User_Steps";
@@ -53,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_USER_EMAIL + " TEXT" + ")";
 
         String HRTable = "CREATE TABLE " + TABLE_HEARTRATE + "("
-                + COLUMN_HEARTRATE_EMAIL + " TEXT,"
+                + COLUMN_USER_EMAIL + " TEXT,"
                 + COLUMN_USER_HEARTRATE + " TEXT)";
 
         String StepsTable = "CREATE TABLE " + TABLE_STEPS + "("
@@ -110,8 +109,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_EMAIL, email);
         values.put(COLUMN_USER_HEARTRATE, HRate);
-        values.put(COLUMN_HEARTRATE_EMAIL, email);
 
         long success = db.insert(TABLE_HEARTRATE, null, values);
     /*Condition for the funtion to add data into the dtb*/
@@ -132,12 +131,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 /*Add Steps count to StepsTable with corresponding email address*/
-    public boolean addSteps (String steps, String email) {
+    public boolean addSteps (int steps, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_STEPS, steps);
         values.put(COLUMN_USER_EMAIL, email);
+        values.put(COLUMN_USER_STEPS, steps);
 
         long success = db.insert(TABLE_STEPS, null, values);
      /*Condition for the funtion to add data into the dtb*/
