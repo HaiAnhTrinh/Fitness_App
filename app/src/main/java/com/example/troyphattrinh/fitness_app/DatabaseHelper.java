@@ -21,13 +21,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_HEARTRATE = "HeartRate";
     private static final String TABLE_STEPS = "Steps";
 
-    /*Create column*/
+    /*Create column for each table*/
+    /*User Table*/
     private static final String COLUMN_USER_NAME = "User_name";
     private static final String COLUMN_USER_PASS = "User_pass";
     private static final String COLUMN_USER_DOB = "User_dob";
     private static final String COLUMN_USER_EMAIL = "User_email";
+    /*Heartrate Table*/
     private static final String COLUMN_HEARTRATE_EMAIL = "Hr_email";
     private static final String COLUMN_USER_HEARTRATE = "User_HeartRate";
+    /*Steps Table*/
     private static final String COLUMN_USER_STEPS= "User_Steps";
 
     /*Drop function will completely delete a table*/
@@ -108,7 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_HEARTRATE, HRate);
-        values.put(COLUMN_USER_EMAIL, email);
+        values.put(COLUMN_HEARTRATE_EMAIL, email);
 
         long success = db.insert(TABLE_HEARTRATE, null, values);
     /*Condition for the funtion to add data into the dtb*/
