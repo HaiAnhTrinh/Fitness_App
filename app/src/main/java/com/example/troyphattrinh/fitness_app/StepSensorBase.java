@@ -16,10 +16,12 @@ public abstract class StepSensorBase implements SensorEventListener {
         this.stepCallBack = stepCallBack;
     }
 
+        //callback
     public interface StepCallBack {
         void Step(int stepNum);
     }
-
+    
+    //register
     public boolean registerStep() {
         if (sensorManager != null) {
             sensorManager.unregisterListener(this);
