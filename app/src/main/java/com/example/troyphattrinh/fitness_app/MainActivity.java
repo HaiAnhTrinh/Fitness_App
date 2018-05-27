@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity implements StepSensorBase.St
 
 
     @Override
+    //Show the steps and send the notification 
     public void Step(int stepNum) {
         mStepText.setText("Steps:" + stepNum);
         int criterion = 10000;
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity implements StepSensorBase.St
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mStepText = (TextView) findViewById(R.id.step_text1);
+        //use the sensor
         mStepSensor = new StepSensorPedometer(this, this);
+        //show the information if the sensor is unavailable 
         if (!mStepSensor.registerStep()) {
             Toast.makeText(this, "Unavailable", Toast.LENGTH_SHORT).show();
         }
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements StepSensorBase.St
         super.onDestroy();
         mStepSensor.unregisterStep();
     }
+    //the clear button, reset the value it saved at first
     public void onClick(View v) {
         StepSensorPedometer.setIsRun(true);
         mStepText.setText("Steps: 0");
