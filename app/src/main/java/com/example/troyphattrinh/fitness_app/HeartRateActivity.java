@@ -24,8 +24,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class HeartRateActivity extends android.support.v4.app.Fragment{
     RingView mringview;
     Button detailsBtn;
-    DatabaseHelper dbh;
-    String email;
+    static DatabaseHelper dbh;
+    static String email;
     static int heartRate;
 
     private static final String TAG = "HeartRate";
