@@ -14,6 +14,7 @@ public class FootstepActivity extends Fragment implements StepSensorBase.StepCal
     private TextView mStepText;
     private StepSensorBase mStepSensor;
     private Button clearBtn;
+    Private StepSensorPedometer stepSensorPedometer;
 
 
     @Override
@@ -51,7 +52,7 @@ public class FootstepActivity extends Fragment implements StepSensorBase.StepCal
             //clear button
             @Override
             public void onClick(View view) {
-                StepSensorPedometer.setIsRun(true);
+                stepSensorPedometer.setIsRun(true);
                 mStepText.setText("Steps: 0");
             }
         });
