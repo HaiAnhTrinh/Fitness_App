@@ -18,8 +18,10 @@ public class FootstepActivity extends Fragment implements StepSensorBase.StepCal
 
     @Override
     public void Step(int stepNum) {
+        //show the information
         mStepText.setText("Steps:" + stepNum);
         int criterion = 10000;
+        //show the notification 
         if(stepNum == criterion){
             Noti.showNotification(this);
             criterion = 0;
@@ -39,12 +41,14 @@ public class FootstepActivity extends Fragment implements StepSensorBase.StepCal
         clearBtn = view.findViewById(R.id.clearBtn);
 
         mStepText = view.findViewById(R.id.step_text1);
+        //use the sensor
         mStepSensor = new StepSensorPedometer(getContext(), this);
         if (!mStepSensor.registerStep()) {
             Toast.makeText(getContext(), "Unavailable", Toast.LENGTH_SHORT).show();
         }
 
         clearBtn.setOnClickListener(new View.OnClickListener() {
+            //clear button
             @Override
             public void onClick(View view) {
                 StepSensorPedometer.setIsRun(true);
