@@ -232,6 +232,7 @@ public class HeartRateActivity extends android.support.v4.app.Fragment{
                 int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
                 //heartrate
                 text.setText(String.valueOf(beatsAvg));
+                heartRate = beatsAvg;
                 dbh.addHRate(heartRate, email);
 
                 startTime = System.currentTimeMillis();
